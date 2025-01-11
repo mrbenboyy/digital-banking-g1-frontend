@@ -1,0 +1,28 @@
+<div class="container">
+  <div class="card col-md-6 offset-3 mt-2">
+    <div class="card-header">Edit Customer</div>
+    <div class="card-body">
+      <form [formGroup]="editCustomerFormGroup" (ngSubmit)="handleUpdateCustomer()">
+        <div class="mb-3">
+          <label class="form-label">Name:</label>
+          <input type="text" formControlName="name" class="form-control">
+          <span class="text-danger" *ngIf="editCustomerFormGroup.controls['name'].touched
+                && editCustomerFormGroup.controls['name'].errors
+                && editCustomerFormGroup.controls['name'].errors!['required']">
+            Name is Required
+          </span>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Email:</label>
+          <input type="text" formControlName="email" class="form-control">
+          <span class="text-danger" *ngIf="editCustomerFormGroup.controls['email'].touched
+                && editCustomerFormGroup.controls['email'].errors
+                && editCustomerFormGroup.controls['email'].errors!['email']">
+            Email is not valid
+          </span>
+        </div>
+        <button [disabled]="!editCustomerFormGroup.valid" class="btn btn-info">Update</button>
+      </form>
+    </div>
+  </div>
+</div>
