@@ -26,7 +26,7 @@ export class CustomerService {
     return this.http.get<Customer>(`${environment.backendHost}/customers/${id}`);
   }
 
-  public updateCustomer(id: number, customer: Customer): Observable<Customer> {
+  updateCustomer(id: number, customer: any): Observable<Customer> {
     return this.http.put<Customer>(`${environment.backendHost}/customers/${id}`, customer);
   }
 

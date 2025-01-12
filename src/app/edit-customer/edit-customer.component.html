@@ -6,20 +6,29 @@
         <div class="mb-3">
           <label class="form-label">Name:</label>
           <input type="text" formControlName="name" class="form-control">
-          <span class="text-danger" *ngIf="editCustomerFormGroup.controls['name'].touched
-                && editCustomerFormGroup.controls['name'].errors
-                && editCustomerFormGroup.controls['name'].errors!['required']">
-            Name is Required
+          <span class="text-danger" *ngIf="editCustomerFormGroup.controls['name'].touched && editCustomerFormGroup.controls['name'].errors">
+            Name is required
           </span>
         </div>
         <div class="mb-3">
           <label class="form-label">Email:</label>
           <input type="text" formControlName="email" class="form-control">
-          <span class="text-danger" *ngIf="editCustomerFormGroup.controls['email'].touched
-                && editCustomerFormGroup.controls['email'].errors
-                && editCustomerFormGroup.controls['email'].errors!['email']">
+          <span class="text-danger" *ngIf="editCustomerFormGroup.controls['email'].touched && editCustomerFormGroup.controls['email'].errors">
             Email is not valid
           </span>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Role:</label>
+          <select formControlName="role" class="form-control">
+            <option *ngFor="let role of availableRoles" [value]="role">{{ role }}</option>
+          </select>
+          <span class="text-danger" *ngIf="editCustomerFormGroup.controls['role'].touched && editCustomerFormGroup.controls['role'].errors">
+            Role is required
+          </span>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">New Password (leave blank to keep current password):</label>
+          <input type="password" formControlName="password" class="form-control">
         </div>
         <button [disabled]="!editCustomerFormGroup.valid" class="btn btn-info">Update</button>
       </form>
