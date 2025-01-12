@@ -2,6 +2,9 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { jwtDecode } from 'jwt-decode';
+import { Observable, throwError } from 'rxjs';
+import { map, catchError } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -47,5 +50,22 @@ export class AuthService {
       this.loadProfile({ "access-token": token });
       this.router.navigateByUrl("/admin/customers");
     }
+  }
+  changePassword(email: string, oldPassword: string, newPassword: string): Observable<any> {
+    const url = `${environment.backendHost}/auth/change-password`;
+    const body = { email, oldPassword, newPassword };
+    return this.http.post(url, body, { responseType: 'text' }).pipe(
+      map(response => {
+        try {
+          return JSON.parse(response); // Essayer de parser la réponse en JSON
+        } catch (e) {
+          return { message: response }; // Si ce n'est pas du JSON, retourner la réponse brute
+        }
+      }),
+      catchError(error => {
+        console.error('Error changing password:', error);
+        return throwError(() => new Error('Failed to change password'));
+      })
+    );
   }
 }

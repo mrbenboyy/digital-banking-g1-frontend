@@ -16,6 +16,7 @@ import { AppHttpInterceptor } from './interceptors/app-http.interceptor';
 import { NotAuthorizedComponent } from './not-authorized/not-authorized.component';
 import { EditCustomerComponent } from './edit-customer/edit-customer.component';
 import { NewAccountComponent } from './new-account/new-account.component';
+import { ChangePasswordComponent } from './change-password/change-password.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { NewAccountComponent } from './new-account/new-account.component';
     NotAuthorizedComponent,
     EditCustomerComponent,
     NewAccountComponent,
+    ChangePasswordComponent,
   ],
   imports: [
     BrowserModule,

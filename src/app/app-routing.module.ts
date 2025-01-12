@@ -11,6 +11,7 @@ import { AuthorizationGuard } from './guards/authorization.guard';
 import { NotAuthorizedComponent } from './not-authorized/not-authorized.component';
 import { EditCustomerComponent } from './edit-customer/edit-customer.component';
 import { NewAccountComponent } from './new-account/new-account.component';
+import { ChangePasswordComponent } from './change-password/change-password.component';
 
 const routes: Routes = [
   { path: "login", component: LoginComponent },
@@ -24,7 +25,8 @@ const routes: Routes = [
       { path: "new-account", component: NewAccountComponent, canActivate: [AuthorizationGuard], data: { role: "ROLE_ADMIN" } },
       { path: "customer-accounts/:id", component: CustomerAccountsComponent },
       { path: "notAuthorized", component: NotAuthorizedComponent },
-      { path: "edit-customer/:id", component: EditCustomerComponent, canActivate: [AuthorizationGuard], data: { role: "ROLE_ADMIN" } }
+      { path: "edit-customer/:id", component: EditCustomerComponent, canActivate: [AuthorizationGuard], data: { role: "ROLE_ADMIN" } },
+      { path: 'change-password', component: ChangePasswordComponent, canActivate: [AuthenticationGuard] }
 
     ]
   }
