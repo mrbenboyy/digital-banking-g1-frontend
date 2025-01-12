@@ -6,28 +6,35 @@
         <div class="mb-3">
           <label class="form-label">Name:</label>
           <input type="text" formControlName="name" class="form-control">
-          <span class="text-danger" *ngIf="newCustomerFormGroup.controls['name'].touched
-                && newCustomerFormGroup.controls['name'].errors
-                && newCustomerFormGroup.controls['name'].errors!['required']">
-            Name is Required
+          <span class="text-danger"
+            *ngIf="newCustomerFormGroup.controls['name'].touched && newCustomerFormGroup.controls['name'].errors">
+            Name is required
           </span>
         </div>
         <div class="mb-3">
           <label class="form-label">Email:</label>
           <input type="text" formControlName="email" class="form-control">
-          <span class="text-danger" *ngIf="newCustomerFormGroup.controls['email'].touched
-                && newCustomerFormGroup.controls['email'].errors
-                && newCustomerFormGroup.controls['email'].errors!['email']">
+          <span class="text-danger"
+            *ngIf="newCustomerFormGroup.controls['email'].touched && newCustomerFormGroup.controls['email'].errors">
             Email is not valid
+          </span>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Role:</label>
+          <select formControlName="role" class="form-control">
+            <option *ngFor="let role of availableRoles" [value]="role">{{ role }}</option>
+          </select>
+          <span class="text-danger"
+            *ngIf="newCustomerFormGroup.controls['role'].touched && newCustomerFormGroup.controls['role'].errors">
+            Role is required
           </span>
         </div>
         <div class="mb-3">
           <label class="form-label">Password:</label>
           <input type="password" formControlName="password" class="form-control">
-          <span class="text-danger" *ngIf="newCustomerFormGroup.controls['password'].touched
-                && newCustomerFormGroup.controls['password'].errors
-                && newCustomerFormGroup.controls['password'].errors!['required']">
-            Password is Required
+          <span class="text-danger"
+            *ngIf="newCustomerFormGroup.controls['password'].touched && newCustomerFormGroup.controls['password'].errors">
+            Password is required
           </span>
         </div>
         <button [disabled]="!newCustomerFormGroup.valid" class="btn btn-info">Save</button>
