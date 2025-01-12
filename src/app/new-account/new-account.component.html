@@ -1,0 +1,62 @@
+<div class="container">
+  <div class="card col-md-6 offset-3 mt-2">
+    <div class="card-header">New Account</div>
+    <div class="card-body">
+      <form [formGroup]="newAccountFormGroup" (ngSubmit)="handleSaveAccount()">
+        <!-- Sélection du client -->
+        <div class="mb-3">
+          <label class="form-label">Customer:</label>
+          <select formControlName="customerId" class="form-control">
+            <option *ngFor="let customer of customers" [value]="customer.id">{{ customer.name }}</option>
+          </select>
+          <span class="text-danger"
+            *ngIf="newAccountFormGroup.controls['customerId'].touched && newAccountFormGroup.controls['customerId'].errors">
+            Customer is required
+          </span>
+        </div>
+
+        <!-- Type de compte -->
+        <div class="mb-3">
+          <label class="form-label">Account Type:</label>
+          <select formControlName="accountType" class="form-control" (change)="onAccountTypeChange($event)">
+            <option value="CURRENT">Current Account</option>
+            <option value="SAVING">Saving Account</option>
+          </select>
+        </div>
+
+        <!-- Solde initial -->
+        <div class="mb-3">
+          <label class="form-label">Initial Balance:</label>
+          <input type="number" formControlName="balance" class="form-control">
+          <span class="text-danger"
+            *ngIf="newAccountFormGroup.controls['balance'].touched && newAccountFormGroup.controls['balance'].errors">
+            Initial balance is required
+          </span>
+        </div>
+
+        <!-- Découvert autorisé (visible uniquement pour les comptes courants) -->
+        <div class="mb-3" *ngIf="showOverdraftField">
+          <label class="form-label">Overdraft:</label>
+          <input type="number" formControlName="overdraft" class="form-control">
+          <span class="text-danger"
+            *ngIf="newAccountFormGroup.controls['overdraft'].touched && newAccountFormGroup.controls['overdraft'].errors">
+            Overdraft is required
+          </span>
+        </div>
+
+        <!-- Taux d'intérêt (visible uniquement pour les comptes d'épargne) -->
+        <div class="mb-3" *ngIf="showInterestRateField">
+          <label class="form-label">Interest Rate:</label>
+          <input type="number" formControlName="interestRate" class="form-control">
+          <span class="text-danger"
+            *ngIf="newAccountFormGroup.controls['interestRate'].touched && newAccountFormGroup.controls['interestRate'].errors">
+            Interest rate is required
+          </span>
+        </div>
+
+        <!-- Bouton de soumission -->
+        <button [disabled]="!newAccountFormGroup.valid" class="btn btn-info">Save</button>
+      </form>
+    </div>
+  </div>
+</div>

@@ -1,7 +1,8 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <div class="container-fluid">
     <a class="navbar-brand" href="#">Navbar</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -9,14 +10,22 @@
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="#">Home</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/admin/accounts">Accounts</a>
+        <li class="nav-item dropdown" *ngIf="authService.roles.includes('ROLE_ADMIN')">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+            aria-expanded="false">
+            Accounts
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item" routerLink="/admin/accounts">List Accounts</a></li>
+            <li><a class="dropdown-item" routerLink="/admin/new-account">New Account</a></li> <!-- Nouvelle option -->
+          </ul>
         </li>
         <li class="nav-item dropdown" *ngIf="authService.roles.includes('ROLE_ADMIN')">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+            aria-expanded="false">
             Customers
           </a>
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdown" >
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
             <li><a class="dropdown-item" routerLink="/admin/customers">Search customers</a></li>
             <li><a class="dropdown-item" routerLink="/admin/new-customer">New customer</a></li>
           </ul>
@@ -25,8 +34,10 @@
           <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
         </li>
       </ul>
-      <ul class="navbar" *ngIf="authService.isAutenticated==true" >
-        <li class="nav-item"><p class="text-danger">{{this.authService.email}}</p></li>
+      <ul class="navbar" *ngIf="authService.isAutenticated==true">
+        <li class="nav-item">
+          <p class="text-danger">{{this.authService.email}}</p>
+        </li>
         <li class="nav-item"><button (click)="handleLogout()" class="btn btn-success">Logout</button></li>
       </ul>
     </div>
