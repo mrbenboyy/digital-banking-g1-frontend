@@ -1,4 +1,28 @@
 <div class="container">
-  <div>{{customerId}}</div>
-  <div>{{customer | json}}</div>
+  <h2>Accounts for Customer: {{ customer.name }}</h2>
+  <div *ngIf="accounts && accounts.length > 0; else noAccounts">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Account ID</th>
+          <th>Balance</th>
+          <th>Type</th>
+          <th>Overdraft</th>
+          <th>Interest Rate</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let account of accounts">
+          <td>{{ account.id }}</td>
+          <td>{{ account.balance | number: '1.2-2' }}</td>
+          <td>{{ account.type }}</td>
+          <td>{{ account.overDraft != null ? (account.overDraft | number: '1.2-2') : 'N/A' }}</td>
+          <td>{{ account.interestRate != null ? (account.interestRate | number: '1.2-2') : 'N/A' }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <ng-template #noAccounts>
+    <p>No accounts found for this customer.</p>
+  </ng-template>
 </div>
