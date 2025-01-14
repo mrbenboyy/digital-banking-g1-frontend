@@ -1,3 +1,4 @@
+<!-- navbar.component.html -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <div class="container-fluid">
     <a class="navbar-brand" href="#">Navbar</a>
@@ -17,7 +18,7 @@
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
             <li><a class="dropdown-item" routerLink="/admin/accounts">List Accounts</a></li>
-            <li><a class="dropdown-item" routerLink="/admin/new-account">New Account</a></li> <!-- Nouvelle option -->
+            <li><a class="dropdown-item" routerLink="/admin/new-account">New Account</a></li>
           </ul>
         </li>
         <li class="nav-item dropdown" *ngIf="authService.roles.includes('ROLE_ADMIN')">
@@ -29,6 +30,9 @@
             <li><a class="dropdown-item" routerLink="/admin/customers">Search customers</a></li>
             <li><a class="dropdown-item" routerLink="/admin/new-customer">New customer</a></li>
           </ul>
+        </li>
+        <li class="nav-item" *ngIf="authService.roles.includes('ROLE_USER')">
+          <a class="nav-link" routerLink="/admin/my-accounts">My Accounts</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" routerLink="change-password">Change Password</a>

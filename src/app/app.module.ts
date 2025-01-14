@@ -18,6 +18,7 @@ import { EditCustomerComponent } from './edit-customer/edit-customer.component';
 import { NewAccountComponent } from './new-account/new-account.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
 import { AppHttpInterceptor } from './interceptors/app-http.interceptor';
+import { MyAccountsComponent } from './my-accounts/my-accounts.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { AppHttpInterceptor } from './interceptors/app-http.interceptor';
     EditCustomerComponent,
     NewAccountComponent,
     ChangePasswordComponent,
+    MyAccountsComponent,
   ],
   imports: [
     BrowserModule,

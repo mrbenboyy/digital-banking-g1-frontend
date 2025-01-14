@@ -5,6 +5,7 @@ import { jwtDecode } from 'jwt-decode';
 import { Observable, throwError } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
+import { Customer } from '../model/customer.model';
 
 @Injectable({
   providedIn: 'root'
@@ -67,5 +68,8 @@ export class AuthService {
         return throwError(() => new Error('Failed to change password'));
       })
     );
+  }
+  getCustomerByEmail(email: string): Observable<Customer> {
+    return this.http.get<Customer>(`${environment.backendHost}/customers/email/${email}`);
   }
 }

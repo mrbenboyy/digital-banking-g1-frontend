@@ -1,0 +1,51 @@
+<div class="container mt-4">
+  <h2>My Accounts</h2>
+  <div *ngIf="errorMessage" class="alert alert-danger">
+    {{ errorMessage }}
+  </div>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Account ID</th>
+        <th>Balance</th>
+        <th>Type</th>
+        <th>Status</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let account of accounts">
+        <td>{{ account.id }}</td>
+        <td>{{ account.balance }}</td>
+        <td>{{ account.type }}</td>
+        <td>{{ account.status }}</td>
+        <td>
+          <button class="btn btn-primary" (click)="viewAccountOperations(account.id)">View Operations</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Display operations for the selected account -->
+  <div *ngIf="operations && operations.length > 0">
+    <h3>Operations for Account: {{ selectedAccountId }}</h3>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Type</th>
+          <th>Amount</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let operation of operations">
+          <td>{{ operation.operationDate | date }}</td>
+          <td>{{ operation.type }}</td>
+          <td>{{ operation.amount }}</td>
+          <td>{{ operation.description }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
