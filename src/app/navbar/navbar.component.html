@@ -1,4 +1,3 @@
-<!-- navbar.component.html -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <div class="container-fluid">
     <a class="navbar-brand" href="#">Navbar</a>
@@ -11,16 +10,21 @@
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="#">Home</a>
         </li>
-        <li class="nav-item dropdown" *ngIf="authService.roles.includes('ROLE_ADMIN')">
+        <!-- Show "Accounts" dropdown for both ROLE_ADMIN and ROLE_USER -->
+        <li class="nav-item dropdown" *ngIf="authService.roles.includes('ROLE_ADMIN') || authService.roles.includes('ROLE_USER')">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
             aria-expanded="false">
             Accounts
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
             <li><a class="dropdown-item" routerLink="/admin/accounts">List Accounts</a></li>
-            <li><a class="dropdown-item" routerLink="/admin/new-account">New Account</a></li>
+            <!-- Show "New Account" only for ROLE_ADMIN -->
+            <li *ngIf="authService.roles.includes('ROLE_ADMIN')">
+              <a class="dropdown-item" routerLink="/admin/new-account">New Account</a>
+            </li>
           </ul>
         </li>
+        <!-- Show "Customers" dropdown only for ROLE_ADMIN -->
         <li class="nav-item dropdown" *ngIf="authService.roles.includes('ROLE_ADMIN')">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
             aria-expanded="false">
@@ -31,9 +35,7 @@
             <li><a class="dropdown-item" routerLink="/admin/new-customer">New customer</a></li>
           </ul>
         </li>
-        <li class="nav-item" *ngIf="authService.roles.includes('ROLE_USER')">
-          <a class="nav-link" routerLink="/admin/my-accounts">My Accounts</a>
-        </li>
+        <!-- Show "Change Password" link for all authenticated users -->
         <li class="nav-item">
           <a class="nav-link" routerLink="change-password">Change Password</a>
         </li>

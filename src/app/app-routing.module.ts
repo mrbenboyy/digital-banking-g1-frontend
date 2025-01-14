@@ -21,7 +21,7 @@ const routes: Routes = [
     path: "admin", component: AdminTemplateComponent, canActivate: [AuthenticationGuard],
     children: [
       { path: "customers", component: CustomersComponent, canActivate: [AuthorizationGuard], data: { role: "ROLE_ADMIN" } },
-      { path: "accounts", component: AccountsComponent },
+      { path: "accounts", component: AccountsComponent, canActivate: [AuthorizationGuard], data: { role: ["ROLE_USER", "ROLE_ADMIN"] } },
       { path: "new-customer", component: NewCustomerComponent, canActivate: [AuthorizationGuard], data: { role: "ROLE_ADMIN" } },
       { path: "new-account", component: NewAccountComponent, canActivate: [AuthorizationGuard], data: { role: "ROLE_ADMIN" } },
       { path: "customer-accounts/:id", component: CustomerAccountsComponent },

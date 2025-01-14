@@ -13,16 +13,18 @@ export class AuthorizationGuard implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    const requiredRole = route.data['role'];  // Get the required role from the route data
+    const requiredRoles = route.data['role']; // Get the required roles from the route data
 
-    // Check if the user is authenticated and has the required role
-    if (this.authService.isAutenticated && this.authService.roles.includes(requiredRole)) {
+    // If requiredRoles is a string, convert it to an array
+    const roles = Array.isArray(requiredRoles) ? requiredRoles : [requiredRoles];
+
+    // Check if the user is authenticated and has one of the required roles
+    if (this.authService.isAutenticated && roles.some(role => this.authService.roles.includes(role))) {
       return true;
     } else {
-      // Redirect to not authorized page if the user doesn't have access
+      // Redirect to the not authorized page if the user doesn't have access
       this.router.navigateByUrl("/admin/notAuthorized");
       return false;
     }
   }
 }
-
